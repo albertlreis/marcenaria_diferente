@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { format } from 'date-fns';
 import api from '../api';
 import ReactPaginate from 'react-paginate';
 import '../TransactionList.css';
@@ -51,9 +52,9 @@ const TransactionList = ({ transactionsUpdated }) => {
                     {transactions.map(transaction => (
                         <tr key={transaction.id}>
                             <td>{transaction.id}</td>
-                            <td>{transaction.date}</td>
+                            <td>{format(new Date(transaction.date), 'dd/MM/yyyy HH:mm:ss')}</td>
                             <td>{transaction.product}</td>
-                            <td>{transaction.value}</td>
+                            <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(transaction.value)}</td>
                         </tr>
                     ))}
                     </tbody>
