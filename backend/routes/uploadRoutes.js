@@ -2,6 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import uploadController from '../controllers/uploadController.js';
 
 const router = express.Router();
 
@@ -23,18 +24,15 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post('/upload', upload.single('file'), (req, res) => {
-    const uploadedFile = req.file;
+router.post('/upload', upload.single('file'), async (req, res) => {
+    try {
+        const uploadedFile = req.file;
+        const lines = await uploadController.processUploadedFile(uploadedFile);
 
-    if (!uploadedFile) {
-        return res.status(400).json({ error: 'Nenhum arquivo foi enviado.' });
+        res.status(200).json({ message: 'Arquivo recebido, salvo e parseado com sucesso.' });
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao processar o arquivo.' });
     }
-
-    if (path.extname(uploadedFile.originalname) !== '.txt') {
-        return res.status(400).json({ error: 'O arquivo deve ser um arquivo de texto (.txt).' });
-    }
-
-    res.status(200).json({ message: 'Arquivo recebido e salvo com sucesso.' });
 });
 
 export default router;
