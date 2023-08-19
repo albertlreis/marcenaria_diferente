@@ -1,6 +1,7 @@
 import express from 'express';
 import uploadRoutes from './routes/uploadRoutes.js';
 import cors from 'cors';
+import transactionRoutes from "./routes/transactionRoutes.js";
 
 const app = express();
 
@@ -15,7 +16,8 @@ app.use(cors(corsOptions));
 const PORT = process.env.PORT || 8000;
 
 // Rotas
-app.use('/api', uploadRoutes);
+app.use('/upload', uploadRoutes);
+app.use('/transaction', transactionRoutes);
 
 // Inicia o servidor
 app.listen(PORT, () => {

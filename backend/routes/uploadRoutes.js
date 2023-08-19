@@ -24,7 +24,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post('/upload', upload.single('file'), async (req, res) => {
+router.post('/', upload.single('file'), async (req, res) => {
     try {
         const uploadedFile = req.file;
         const transactions = await uploadController.processUploadedFile(uploadedFile);
