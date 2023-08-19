@@ -1,15 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import api from '../api';
+import ReactPaginate from 'react-paginate';
+import '../TransactionList.css';
 
 const TransactionList = () => {
     const [transactions, setTransactions] = useState([]);
+    const [totalPages, setTotalPages] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const handlePageChange = async (page) => {
+        try {
+            const response = await api.get(`/transaction/show?page=${page.selected + 1}`);
+            setTransactions(response.data.data);
+            setCurrentPage(response.data.currentPage);
+            setTotalPages(response.data.totalPages);
+        } catch (error) {
+            console.error('Erro ao buscar transações:', error);
+        }
+    };
 
     useEffect(() => {
-        // Função para buscar as transações importadas
         const fetchTransactions = async () => {
             try {
                 const response = await api.get('/transaction/show');
-                setTransactions(response.data);
+                setTransactions(response.data.data);
+                setCurrentPage(response.data.currentPage);
+                setTotalPages(response.data.totalPages);
             } catch (error) {
                 console.error('Erro ao buscar transações:', error);
             }
@@ -20,29 +36,41 @@ const TransactionList = () => {
 
     return (
         <div>
-            <h2>Lista de Transações Importadas</h2>
-            <table className="ui celled table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Data</th>
-                    <th>Produto</th>
-                    <th>Valor</th>
-                    {/* Adicione mais colunas conforme necessário */}
-                </tr>
-                </thead>
-                <tbody>
-                {transactions.map(transaction => (
-                    <tr key={transaction.id}>
-                        <td>{transaction.id}</td>
-                        <td>{transaction.date}</td>
-                        <td>{transaction.product}</td>
-                        <td>{transaction.value}</td>
-                        {/* Adicione mais colunas conforme necessário */}
+            <h2 className="ui header">Lista de Transações Importadas</h2>
+            {transactions.length > 0 ? (
+                <table className="ui celled table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Data</th>
+                        <th>Produto</th>
+                        <th>Valor</th>
                     </tr>
-                ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {transactions.map(transaction => (
+                        <tr key={transaction.id}>
+                            <td>{transaction.id}</td>
+                            <td>{transaction.date}</td>
+                            <td>{transaction.product}</td>
+                            <td>{transaction.value}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p>Não há transações para exibir.</p>
+            )}
+            <ReactPaginate
+                previousLabel={'Anterior'}
+                nextLabel={'Próxima'}
+                pageCount={totalPages}
+                onPageChange={handlePageChange}
+                containerClassName={'pagination'}
+                activeClassName={'active'}
+                previousLinkClassName={'prev'}
+                nextLinkClassName={'next'}
+            />
         </div>
     );
 };
