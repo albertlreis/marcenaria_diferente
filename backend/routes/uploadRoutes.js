@@ -29,8 +29,6 @@ router.post('/upload', upload.single('file'), async (req, res) => {
         const uploadedFile = req.file;
         const transactions = await uploadController.processUploadedFile(uploadedFile);
 
-        console.log("transactions::: ", transactions)
-
         res.status(200).json({ transactions, message: 'Arquivo recebido, salvo e parseado com sucesso.' });
     } catch (error) {
         res.status(500).json({ error: 'Erro ao processar o arquivo.' });
