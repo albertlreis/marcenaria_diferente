@@ -36,10 +36,10 @@ const TransactionList = ({ transactionsUpdated }) => {
     }, [transactionsUpdated]);
 
     return (
-        <div>
+        <div className="table-container">
             <h2 className="ui header">Lista de Transações Importadas</h2>
             {transactions.length > 0 ? (
-                <table className="ui celled table">
+                <table className="transaction-table ui celled table">
                     <thead>
                     <tr>
                         <th>ID</th>

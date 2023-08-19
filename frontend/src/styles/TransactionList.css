@@ -11,25 +11,54 @@
 .pagination li a {
     text-decoration: none;
     padding: 5px 10px;
-    background-color: #f1f1f1;
-    color: #333;
-    border: 1px solid #ccc;
+    background-color: #007bff; /* Cor de fundo azul */
+    color: #fff; /* Cor do texto branco */
+    border: 1px solid #007bff;
     border-radius: 3px;
     cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .pagination li a.active {
-    background-color: #007bff;
-    color: #fff;
-    border: 1px solid #007bff;
+    background-color: #fff; /* Cor de fundo branco para o botão ativo */
+    color: #007bff; /* Cor do texto azul para o botão ativo */
 }
 
-.pagination li a.prev, .pagination li a.next {
-    background-color: #ddd;
+.pagination li a.prev,
+.pagination li a.next {
+    background-color: #ccc; /* Cor de fundo cinza */
+    color: #333; /* Cor do texto cinza escuro */
 }
 
-.pagination li a.prev:hover, .pagination li a.next:hover {
-    background-color: #ccc;
-    cursor: pointer;
+.pagination li a.prev:hover,
+.pagination li a.next:hover,
+.pagination li a:not(.active):hover {
+    background-color: #007bff; /* Cor de fundo azul ao passar o mouse */
+    border-color: #007bff; /* Cor da borda azul ao passar o mouse */
+    color: #fff; /* Cor do texto branco ao passar o mouse */
 }
 
+.table-container {
+    margin: 25px auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.transaction-table th,
+.transaction-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.transaction-table th {
+    background-color: #f5f5f5;
+}
