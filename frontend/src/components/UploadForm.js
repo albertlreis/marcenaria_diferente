@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import api from '../api';
 
-const FileUpload = () => {
+const UploadForm = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [message, setMessage] = useState('');
 
@@ -14,17 +16,12 @@ const FileUpload = () => {
             formData.append('file', selectedFile);
 
             try {
-                const response = await fetch('http://localhost:8000/api/upload', {
-                    method: 'POST',
-                    body: formData,
-                });
+                const response = await api.post('/upload', formData);
 
-                const data = await response.json();
-
-                if (response.ok) {
+                if (response.status === 200) {
                     setMessage('Arquivo enviado com sucesso!');
                 } else {
-                    setMessage(`Erro: ${data.error}`);
+                    setMessage(`Erro: ${response.data.message}`);
                 }
             } catch (error) {
                 console.error('Erro ao fazer o upload:', error);
@@ -45,4 +42,4 @@ const FileUpload = () => {
     );
 };
 
-export default FileUpload;
+export default UploadForm;
