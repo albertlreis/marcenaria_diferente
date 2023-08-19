@@ -27,9 +27,11 @@ const upload = multer({ storage });
 router.post('/upload', upload.single('file'), async (req, res) => {
     try {
         const uploadedFile = req.file;
-        const lines = await uploadController.processUploadedFile(uploadedFile);
+        const transactions = await uploadController.processUploadedFile(uploadedFile);
 
-        res.status(200).json({ message: 'Arquivo recebido, salvo e parseado com sucesso.' });
+        console.log("transactions::: ", transactions)
+
+        res.status(200).json({ transactions, message: 'Arquivo recebido, salvo e parseado com sucesso.' });
     } catch (error) {
         res.status(500).json({ error: 'Erro ao processar o arquivo.' });
     }
