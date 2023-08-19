@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, {useState} from 'react';
+import '../src/styles/App.css';
 import UploadForm from './components/UploadForm';
 import TransactionList from "./components/TransactionList";
 
@@ -12,8 +12,14 @@ function App() {
 
     return (
         <div className="App">
-            <UploadForm onTransactionsUpdated={handleTransactionsUpdated} />
-            <TransactionList transactionsUpdated={transactionsUpdated} />
+            <div className="container">
+                <div className="form-container bordered">
+                    <UploadForm onTransactionsUpdated={handleTransactionsUpdated}/>
+                </div>
+                <div className="table-container">
+                    <TransactionList transactionsUpdated={transactionsUpdated}/>
+                </div>
+            </div>
         </div>
     );
 }

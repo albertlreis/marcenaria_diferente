@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { format } from 'date-fns';
 import api from '../api';
 import ReactPaginate from 'react-paginate';
-import '../TransactionList.css';
+import '../styles/TransactionList.css';
 
 const TransactionList = ({ transactionsUpdated }) => {
     const [transactions, setTransactions] = useState([]);
