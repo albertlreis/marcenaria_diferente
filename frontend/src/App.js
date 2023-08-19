@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.css';
-import FileUpload from './components/UploadForm';
+import UploadForm from './components/UploadForm';
+import TransactionList from "./components/TransactionList";
 
 function App() {
-  return (
-      <div className="App">
-        <FileUpload />
-      </div>
-  );
+    return (
+        <div className="App">
+            <UploadForm/>
+            <TransactionList/>
+        </div>
+    );
 }
 
 export default App;
