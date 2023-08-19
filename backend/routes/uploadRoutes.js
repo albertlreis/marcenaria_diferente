@@ -1,8 +1,15 @@
 import express from 'express';
 import multer from 'multer';
 import path from 'path';
+import fs from 'fs';
 
 const router = express.Router();
+
+// Verifica se a pasta uploads existe e a cria se necessário
+const uploadsFolderPath = path.join(process.cwd(), 'uploads');
+if (!fs.existsSync(uploadsFolderPath)) {
+    fs.mkdirSync(uploadsFolderPath);
+}
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
