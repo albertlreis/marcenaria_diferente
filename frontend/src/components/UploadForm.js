@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import api from '../api';
 
-const UploadForm = () => {
+const UploadForm = ({ onTransactionsUpdated }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [message, setMessage] = useState('');
 
@@ -19,6 +19,7 @@ const UploadForm = () => {
 
                 if (response.status === 200) {
                     setMessage('Arquivo enviado com sucesso!');
+                    onTransactionsUpdated(); // Atualiza a lista de transações
                 } else {
                     setMessage(`Erro: ${response.data.message}`);
                 }

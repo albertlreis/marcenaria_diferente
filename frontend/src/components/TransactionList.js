@@ -3,7 +3,7 @@ import api from '../api';
 import ReactPaginate from 'react-paginate';
 import '../TransactionList.css';
 
-const TransactionList = () => {
+const TransactionList = ({ transactionsUpdated }) => {
     const [transactions, setTransactions] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
@@ -32,7 +32,7 @@ const TransactionList = () => {
         };
 
         fetchTransactions();
-    }, []);
+    }, [transactionsUpdated]);
 
     return (
         <div>
