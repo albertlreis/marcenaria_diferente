@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import Transaction from "../models/Transaction.js";
 
 const processUploadedFile = async (uploadedFile) => {
     if (!uploadedFile) {
@@ -26,6 +27,24 @@ const processUploadedFile = async (uploadedFile) => {
             seller: line.substring(66, 86).trim()
         };
     }).filter(transaction => transaction !== null); // Filtra linhas nulas
+
+    // Inserção dos dados no banco
+    try {
+        await Transaction.sync();
+
+        for (const transaction of transactions) {
+            await Transaction.create({
+                type: transaction.type,
+                date: transaction.date,
+                product: transaction.product,
+                value: transaction.value,
+                seller: transaction.seller
+            });
+        }
+
+    } catch (error) {
+        console.error('Erro ao inserir dados no banco:', error);
+    }
 
     return transactions; // Retorna as linhas processadas
 };
