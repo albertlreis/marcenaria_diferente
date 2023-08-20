@@ -13,7 +13,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Porta em que o servidor irá escutar
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 
 // Rotas
 app.use('/upload', uploadRoutes);
