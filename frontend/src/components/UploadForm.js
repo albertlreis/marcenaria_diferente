@@ -3,7 +3,7 @@ import { Form, Button, Message } from 'semantic-ui-react';
 import api from '../api';
 import '../styles/UploadForm.css';
 
-const UploadForm = ({ onTransactionsUpdated }) => {
+const UploadForm = ({ onTransactionsUpdated, onLogout  }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -38,6 +38,10 @@ const UploadForm = ({ onTransactionsUpdated }) => {
         }
     };
 
+    const handleLogout = () => {
+        onLogout(); // Chama a função de logout passada como prop
+    };
+
     return (
         <div className="upload-form-container">
             <h1 className="upload-form-title">Upload de Arquivo</h1>
@@ -49,6 +53,7 @@ const UploadForm = ({ onTransactionsUpdated }) => {
                 <Button primary onClick={handleUpload}>
                     Enviar
                 </Button>
+                <Button secondary onClick={handleLogout}>Logout</Button>
             </Form>
             {message && <Message>{message}</Message>}
         </div>
