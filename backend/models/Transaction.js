@@ -1,11 +1,8 @@
 import { DataTypes } from 'sequelize';
 import db from './db.js';
+import TransactionType from "./TransactionType.js";
 
 const Transaction = db.define('transaction', {
-    type: {
-        type: DataTypes.STRING(1),
-        allowNull: false
-    },
     date: {
         type: DataTypes.DATE,
         allowNull: false
@@ -23,7 +20,10 @@ const Transaction = db.define('transaction', {
         allowNull: false
     }
 }, {
-    schema: 'public' // Define o esquema da tabela
+    schema: 'public'
 });
+
+Transaction.belongsTo(TransactionType, { foreignKey: 'type' });
+
 
 export default Transaction;
