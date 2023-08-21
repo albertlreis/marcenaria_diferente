@@ -1,7 +1,10 @@
 import express from 'express';
-import uploadRoutes from './routes/uploadRoutes.js';
 import cors from 'cors';
+import bodyParser from 'body-parser';
+
+import authRoutes from './auth/authRoutes.js';
 import transactionRoutes from "./routes/transactionRoutes.js";
+import uploadRoutes from './routes/uploadRoutes.js';
 
 const app = express();
 
@@ -12,10 +15,14 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+// Parse incoming requests with JSON payloads
+app.use(bodyParser.json());
+
 // Porta em que o servidor irá escutar
 const PORT = process.env.PORT || 5000;
 
 // Rotas
+app.use('/auth', authRoutes);
 app.use('/upload', uploadRoutes);
 app.use('/transaction', transactionRoutes);
 
