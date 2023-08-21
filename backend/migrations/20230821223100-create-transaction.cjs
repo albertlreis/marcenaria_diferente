@@ -11,7 +11,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       type: {
-        type: Sequelize.STRING(1),
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       date: {
@@ -23,7 +23,7 @@ module.exports = {
         allowNull: false
       },
       value: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false
       },
       seller: {
@@ -42,6 +42,11 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('transactions');
+    /**
+     * Add reverting commands here.
+     *
+     * Example:
+     * await queryInterface.dropTable('users');
+     */
   }
 };
