@@ -45,6 +45,7 @@ const TransactionList = ({ transactionsUpdated }) => {
                         <th>ID</th>
                         <th>Data</th>
                         <th>Produto</th>
+                        <th>Tipo</th>
                         <th>Valor</th>
                     </tr>
                     </thead>
@@ -52,6 +53,7 @@ const TransactionList = ({ transactionsUpdated }) => {
                     {transactions.map(transaction => (
                         <tr key={transaction.id}>
                             <td>{transaction.id}</td>
+                            <td>{transaction.transaction_type.description}</td>
                             <td>{format(new Date(transaction.date), 'dd/MM/yyyy HH:mm:ss')}</td>
                             <td>{transaction.product}</td>
                             <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(transaction.value)}</td>
