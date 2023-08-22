@@ -43,9 +43,9 @@ const TransactionList = ({ transactionsUpdated }) => {
                     <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Tipo</th>
                         <th>Data</th>
                         <th>Produto</th>
-                        <th>Tipo</th>
                         <th>Valor</th>
                     </tr>
                     </thead>
