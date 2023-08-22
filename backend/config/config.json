@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": null,
     "database": "marcenaria",
-    "host": "localhost",
+    "host": "db",
     "dialect": "postgres"
   },
   "test": {

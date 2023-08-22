@@ -10,7 +10,7 @@ const app = express();
 
 // Configurar o CORS para permitir a origem do front-end
 const corsOptions = {
-    origin: 'http://localhost:3000', // Ajuste a URL do seu front-end
+    origin: '*', // Permitir qualuqer origem
     optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
