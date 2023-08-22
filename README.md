@@ -73,7 +73,14 @@ docker-compose up
 ```
 >Esse processo pode ser demorado dependendo da capacidade de processamento do computador/servidor
 
-8. Isso iniciará três containers: um para o backend, outro para o frontend e um terceiro para o banco de dados PostgreSQL. 
+8. Isso iniciará três containers: um para o backend, outro para o frontend e um terceiro para o banco de dados PostgreSQL.
+
+9. Abra um novo terminal na raiz do projeto para executar as migrações do banco de dados.
+
+```bash
+docker-compose exec backend npx sequelize-cli db:migrate
+docker-compose exec backend npx sequelize-cli db:seed:all
+```
 
 9. Acesse a aplicação no seu navegador em `http://localhost:3000`.
 
